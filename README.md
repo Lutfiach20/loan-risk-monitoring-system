@@ -21,16 +21,16 @@ Camunda → Python Worker → Elasticsearch → Kibana / Grafana
 
 ## 🔄 Alur Sistem
 
-1. User menginput data pengajuan pinjaman
-2. Camunda menjalankan workflow BPMN
-3. Python worker mengambil task (external task)
+1. User menginput data pengajuan pinjaman  
+2. Camunda menjalankan workflow BPMN  
+3. Python worker mengambil task (external task)  
 4. Worker memproses:
    - Validate data
    - Enrich data
    - Hitung risk
-   - Tentukan decision
-5. Data dikirim ke Elasticsearch
-6. Data divisualisasikan di Kibana & Grafana
+   - Tentukan decision  
+5. Data dikirim ke Elasticsearch  
+6. Data divisualisasikan di Kibana & Grafana  
 
 ---
 
@@ -41,8 +41,8 @@ Worker bertugas mengambil task dari Camunda dan memproses logic bisnis.
 ### Proses yang dilakukan:
 
 ### 1. Validate Data
-- Mengecek apakah data valid
-- Output: `isValid = true/false`
+- Mengecek apakah data valid  
+- Output: `isValid = true/false`  
 
 ---
 
