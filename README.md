@@ -93,18 +93,16 @@ Data dikirim untuk kebutuhan monitoring dan visualisasi
   "timestamp": "2026-05-04T10:00:00Z"
 }
 
----
-
 ## 🖼️ Screenshot
 
-### 🔹 BPMN Workflow
+### BPMN Workflow
 ![BPMN](workflow.png)
 
-### 🔹 Kibana Dashboard
+### Kibana Dashboard
 ![Kibana](kibana.png)
 
-### 🔹 Grafana Dashboard
+### Grafana Dashboard
 ![Grafana](grafana.png)
 
-### 🔹 Worker Log
+### Worker Log
 ![Worker](worker.png)
