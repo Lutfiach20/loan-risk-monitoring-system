@@ -1,92 +1,64 @@
-# Loan Risk Monitoring System (Camunda + Python + Elasticsearch + Grafana)
+# Loan Risk Monitoring System
 
-Project ini merupakan implementasi sistem workflow pemrosesan pengajuan pinjaman menggunakan **Camunda BPMN** yang terintegrasi dengan **Python Worker**, serta monitoring menggunakan **Elasticsearch, Kibana, dan Grafana**.
-
----
-
-## 🔧 Teknologi yang Digunakan
-- Camunda BPMN (Workflow Engine)
-- Python (External Task Worker)
-- Elasticsearch (Data Storage)
-- Kibana (Data Exploration)
-- Grafana (Dashboard Monitoring)
+Sistem workflow pemrosesan pengajuan pinjaman menggunakan **Camunda BPMN**, diproses oleh **Python Worker**, dan dimonitor menggunakan **Elasticsearch, Kibana, dan Grafana**.
 
 ---
 
-## 🧠 Arsitektur Sistem
+## 🧠 Arsitektur
 
-Camunda → Python Worker → Elasticsearch → Kibana / Grafana
+Camunda → Worker (Python) → Elasticsearch → Kibana / Grafana
 
 ---
 
-## 🔄 Alur Sistem + Visual
+## 🔄 Alur Sistem
 
-### 1️⃣ Workflow BPMN (Camunda)
-Proses dimulai dari BPMN yang mengatur alur validasi, perhitungan risk, hingga keputusan.
+### 1. Workflow (Camunda)
+BPMN mengatur seluruh alur proses pinjaman dari awal sampai akhir.
 
 ![BPMN](https://raw.githubusercontent.com/Lutfiach20/loan-risk-monitoring-system/main/workflow.png)
 
 ---
 
-### 2️⃣ Worker Memproses Task (Python)
-Worker mengambil task dari Camunda (external task) dan menjalankan logic:
-- Validate
-- Enrich
-- Calculate Risk
-- Finalize Decision
+### 2. Processing (Python Worker)
+Worker mengambil task dari Camunda dan menjalankan logic:
+- Validasi data
+- Perhitungan risk
+- Penentuan decision
 
 ![Worker](https://raw.githubusercontent.com/Lutfiach20/loan-risk-monitoring-system/main/worker.png)
 
 ---
 
-### 3️⃣ Data Masuk ke Elasticsearch & Dilihat di Kibana
-Hasil proses (risk & decision) dikirim ke Elasticsearch, lalu bisa diexplore di Kibana.
+### 3. Data Monitoring (Kibana)
+Data hasil proses dikirim ke Elasticsearch dan bisa dianalisa di Kibana.
 
 ![Kibana](https://raw.githubusercontent.com/Lutfiach20/loan-risk-monitoring-system/main/kibana.png)
 
 ---
 
-### 4️⃣ Monitoring Dashboard di Grafana
-Data divisualisasikan dalam bentuk dashboard (pie, bar, dll) untuk monitoring.
+### 4. Dashboard (Grafana)
+Visualisasi data dalam bentuk dashboard monitoring.
 
 ![Grafana](https://raw.githubusercontent.com/Lutfiach20/loan-risk-monitoring-system/main/grafana.png)
 
 ---
 
-## ⚙️ Logic Business (Python Worker)
+## ⚙️ Logic
 
-### Calculate Risk (berdasarkan amount)
+**Risk Level**
+- Low: ≤ 3 juta  
+- Medium: ≤ 10 juta  
+- High: > 10 juta  
 
-| Range | Risk |
-|------|------|
-| ≤ 3.000.000 | Low |
-| ≤ 10.000.000 | Medium |
-| > 10.000.000 | High |
-
----
-
-### Final Decision
-
-| Risk | Decision |
-|------|----------|
-| Low | AUTO_APPROVED |
-| Medium | MANAGER_APPROVAL |
-| High | DIRECTOR_APPROVAL |
+**Decision**
+- Low → Auto Approved  
+- Medium → Manager Approval  
+- High → Director Approval  
 
 ---
 
-## 📊 Contoh Data Output (Elasticsearch)
+## 🚀 Run
 
-```json
-{
-  "networkOrder": "N0101",
-  "riskLevel": "low",
-  "decision": "AUTO_APPROVED",
-  "amount": 1000000,
-  "income": 12000000,
-  "creditScore": 780,
-  "age": 25,
-  "tenure": 6,
-  "existingLoan": 0,
-  "timestamp": "2026-05-04T10:00:00Z"
-}
+```bash
+pip install requests
+python worker.py
