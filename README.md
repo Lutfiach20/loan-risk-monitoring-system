@@ -1,4 +1,5 @@
 # Loan Risk Monitoring System (Camunda + Python + Elasticsearch + Grafana)
+![TEST](https://raw.githubusercontent.com/Lutfiach20/loan-risk-monitoring-system/main/grafana.png)
 
 Project ini merupakan implementasi sistem workflow pemrosesan pengajuan pinjaman menggunakan **Camunda BPMN** yang terintegrasi dengan **Python Worker**, serta monitoring menggunakan **Elasticsearch, Kibana, dan Grafana**.
 
