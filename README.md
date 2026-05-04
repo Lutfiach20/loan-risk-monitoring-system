@@ -19,34 +19,43 @@ Camunda → Python Worker → Elasticsearch → Kibana / Grafana
 
 ---
 
-## 🔄 Alur Sistem
+## 🔄 Alur Sistem + Visual
 
-1. User menginput data pengajuan pinjaman  
-2. Camunda menjalankan workflow BPMN  
-3. Python worker mengambil task (external task)  
-4. Worker memproses:
-   - Validate data
-   - Enrich data
-   - Hitung risk
-   - Tentukan decision  
-5. Data dikirim ke Elasticsearch  
-6. Data divisualisasikan di Kibana & Grafana  
+### 1️⃣ Workflow BPMN (Camunda)
+Proses dimulai dari BPMN yang mengatur alur validasi, perhitungan risk, hingga keputusan.
+
+![BPMN](https://raw.githubusercontent.com/Lutfiach20/loan-risk-monitoring-system/main/workflow.png)
 
 ---
 
-## ⚙️ Python Worker
+### 2️⃣ Worker Memproses Task (Python)
+Worker mengambil task dari Camunda (external task) dan menjalankan logic:
+- Validate
+- Enrich
+- Calculate Risk
+- Finalize Decision
 
-Worker bertugas mengambil task dari Camunda dan memproses logic bisnis.
+![Worker](https://raw.githubusercontent.com/Lutfiach20/loan-risk-monitoring-system/main/worker.png)
 
-### 1. Validate Data
-- Mengecek apakah data valid  
-- Output: `isValid = true/false`  
+---
 
-### 2. Enrich Data
-- Simulasi enrichment data (dummy process)
+### 3️⃣ Data Masuk ke Elasticsearch & Dilihat di Kibana
+Hasil proses (risk & decision) dikirim ke Elasticsearch, lalu bisa diexplore di Kibana.
 
-### 3. Calculate Risk
-Berdasarkan jumlah pinjaman (`amount`):
+![Kibana](https://raw.githubusercontent.com/Lutfiach20/loan-risk-monitoring-system/main/kibana.png)
+
+---
+
+### 4️⃣ Monitoring Dashboard di Grafana
+Data divisualisasikan dalam bentuk dashboard (pie, bar, dll) untuk monitoring.
+
+![Grafana](https://raw.githubusercontent.com/Lutfiach20/loan-risk-monitoring-system/main/grafana.png)
+
+---
+
+## ⚙️ Logic Business (Python Worker)
+
+### Calculate Risk (berdasarkan amount)
 
 | Range | Risk |
 |------|------|
@@ -54,16 +63,15 @@ Berdasarkan jumlah pinjaman (`amount`):
 | ≤ 10.000.000 | Medium |
 | > 10.000.000 | High |
 
-### 4. Finalize Decision
+---
+
+### Final Decision
 
 | Risk | Decision |
 |------|----------|
 | Low | AUTO_APPROVED |
 | Medium | MANAGER_APPROVAL |
 | High | DIRECTOR_APPROVAL |
-
-### 5. Send to Elasticsearch
-Data dikirim untuk kebutuhan monitoring dan visualisasi
 
 ---
 
