@@ -92,3 +92,19 @@ Data dikirim untuk kebutuhan monitoring dan visualisasi
   "existingLoan": 0,
   "timestamp": "2026-05-04T10:00:00Z"
 }
+
+---
+
+## 🖼️ Screenshot
+
+### 🔹 BPMN Workflow
+![BPMN](workflow.png)
+
+### 🔹 Kibana Dashboard
+![Kibana](kibana.png)
+
+### 🔹 Grafana Dashboard
+![Grafana](grafana.png)
+
+### 🔹 Worker Log
+![Worker](worker.png)
